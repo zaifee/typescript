@@ -28,17 +28,78 @@ console.log(myName);
 
 //------function parameter annotations
 
-function addOne(num: number){
-    return num + 1;
-}
-const res = addOne(3);
-console.log(res);
+// function addOne(num: number){
+//     return num + 1;
+// }
+// const res = addOne(3);
+// console.log(res);
 
 
-//Arrow functions 
-const addTwo = (x: number, y: number) =>  x* y;
-const ans = addTwo(2, 3);
-console.log('Multi', ans);
+// //Arrow functions 
+// const addTwo = (x: number, y: number) =>  x* y;
+// const ans = addTwo(2, 3);
+// console.log('Multi', ans);
+
+
+//regular function 
+// function greet(name : string) : string {
+//     return(`Hello ${name}`);
+    
+// }
+
+// const res = greet("Nawaz");
+// console.log(res);
+
+//Arrow function 
+const greet = (name: string) : string => { return(`Hello ${name}`) }
+console.log(greet("Mohd Nawaz"));
+
+//void is used as a return type 
+// function printMessage(message: string) : void {
+//     console.log(`This is my message ${message}`);
+// }
+
+// printMessage("message");
+
+
+// error throwing with never
+// function throwError(msg: string) : never {
+//     throw new Error(msg);
+    
+// }
+
+// let x : never;
+
+// // infinite loop with never 
+// function neverReturns() : never {
+//     while(true) {}
+// }
+
+// x : neverReturns();
+
+// arrays in typescript 
+// const numbers : number[] = [1,2, 3, 4];
+// console.log(numbers)
+
+// Array<type>  
+// const nums : Array<number> = [1, 2, 3, 4];
+// console.log(nums);
+
+// const items: string[] = [];
+// items.push("keyboard");
+// console.log(items);
+
+
+// --------- Multi-Dimensional array---------------
+const singleDi : number[] = [1, 2, 3,4];
+const doubleDi : number[][] = [[1, 2, 3, 5]];
+const tripledi : number[][][] = [[[1, 2, 3, 4]]];
+
+console.log(singleDi);
+console.log(doubleDi);
+console.log(tripledi);
+
+
 
 
 
