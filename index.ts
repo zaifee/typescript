@@ -245,6 +245,7 @@ console.log(`first Value ${firstValue} and SecondValue is ${secondValue}`);
 // console.log(p1);
 
 // Access Modifier in TS 
+/*
 class Human {
    public firstName : string;
    private lastName: string;
@@ -295,7 +296,89 @@ myInstance.myProperty = 20;
 console.log(`Current value: ${myInstance.myProperty}`);
 
 
+*/
 
+// Interfaces in TS 
+interface Person{
+    firstName: string,
+    lastName: string,
+    age: number;
+}
+
+const examplePerson : Person = {
+    firstName: "Mohd",
+    lastName: "Nawaz",
+    age: 23
+}
+console.log(examplePerson.lastName);
+
+//More exmaples 
+interface movie{
+   readonly name: string;
+   rating: number;
+   genra? : string;
+}
+
+// const movie1 : movie = {
+//     name: "star wars",
+//     rating: 4.5,
+//     genra: "action"
+// }
+
+// console.log(`Your selected movie is: ${movie1.name} and its rating ${movie1.rating}`);
+
+// Interface with functions 
+interface MathOperation{
+    (x : number, y: number) : number
+}
+
+const add : MathOperation = (a, b)  => a + b;
+const subt : MathOperation = (a, b) => a - b;
+console.log(add(2, 3));
+console.log(subt(3, 2));
+
+
+interface Song{
+    songName: string,
+    singerName: string,
+    printSongInfo(songName: string, singerName: string) : string;
+}
+
+const song1 : Song = {
+    songName : "natural",
+    singerName: "Malaika Sharawat",
+    printSongInfo: (songName, singerName) => {
+        return `Song : ${songName}, Singer: ${singerName}`;
+    }
+}
+
+console.log(song1.printSongInfo("Sayyara", "Don'tKnow"));
+
+interface MovieDetails{
+    name: string,
+    rating: number,
+    printMovieInfo(name: string, rating: number) : string | number;
+}
+
+interface MovieGenra extends MovieDetails{
+    genra : string
+}
+
+const movie1 : MovieGenra = {
+    name: "Star wars",
+    rating: 3,
+    genra: "action",
+    printMovieInfo(
+        name: string,
+        rating: number,
+
+    ) : string | number {
+        return `Movie name: ${name} Price: ${rating}`
+    }
+}
+
+const res1 = movie1.printMovieInfo("sayyara", 9.6)
+console.log(res1);
 
 
 
