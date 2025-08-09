@@ -354,6 +354,7 @@ const song1 : Song = {
 
 console.log(song1.printSongInfo("Sayyara", "Don'tKnow"));
 
+// ---------Interface with Methods -----------
 interface MovieDetails{
     name: string,
     rating: number,
@@ -379,6 +380,233 @@ const movie1 : MovieGenra = {
 
 const res1 = movie1.printMovieInfo("sayyara", 9.6)
 console.log(res1);
+
+// --- Interface with classes--------
+interface Car{
+    start() : void,
+    stop() : void
+}
+
+class Car implements Car{
+    start(): void {
+        console.log(`Car is started`);
+    }
+    stop() : void {
+        console.log(`Car is stopped`);
+    }
+}
+
+const myCar = new Car();
+myCar.start();  
+
+//Declaration merging in typescript 
+interface Car{
+    brand: string,
+    start() : void
+}
+
+//declaration merging 
+interface Car{
+    model: string,
+    stop(): void
+}
+
+const myGadi : Car = {
+    brand: "BMW",
+    model: "m3",
+
+    start(){
+        console.log("Start");
+    }, 
+
+    stop(){
+        console.log("Stopped");
+        
+    }
+} 
+
+myGadi.start();
+
+// Generic in TypeScript -- why we need generic becuase while passing argument we have to pass 
+function printNumber(item: number, defaultValue: number) : [number, number] {
+    return [item, defaultValue];
+}
+function printString(item: string, defaultValue: number) : [string, number] {
+    return [item, defaultValue];
+}
+
+
+
+const ans = printNumber(2, 3);
+// const ansString = printString(2, 4); 
+console.log('----',ans);
+
+// generic 
+function uniqueDataTypeFunc<T> (
+    item: T,
+    defaultValue: T
+) : [T, T] {
+    return [item, defaultValue];
+
+}
+
+// const numb = uniqueDataTypeFunc<number>(10, 20);
+// const str = uniqueDataTypeFunc<string>("Mohd", "Nawaz");
+// console.log(`Numbers: ${numb}`);
+// console.log(`Strings are: ${str}`);
+// interface Dog{
+//     name: string,
+//     breed: string
+// }
+
+// const dog1 = uniqueDataTypeFunc<Dog>(
+//     {name: "dogo1", breed: "masterBreed"},
+//     {name: "dogo2", breed: "master1Breed"}
+// );
+
+// console.log(dog1);
+
+
+// //example 2
+function generateRandomKey<T>(obj: {[key: string] : T} ): {
+    key: String,
+    value: T
+}{
+    const keys = Object.keys(obj);
+    console.log('-----------',keys);
+    const randomKey = keys[Math.floor(Math.random() * keys.length)];
+    return ({key: randomKey, value: obj[randomKey]});
+}
+
+const stringObj = {a : "apple", b : "Mango", c : "cherry"};
+const randomStringPair = generateRandomKey<string>(stringObj);
+console.log(`RandomString Pair ${JSON.stringify(randomStringPair)}`);
+
+//for numbers obj j
+const numbObj  = {one: 1, two: 2, three: 3};
+const randomNumbPair = generateRandomKey<number>(numbObj);
+console.log(`----------${JSON.stringify(randomNumbPair)}`);
+
+
+//filter array based on specific condition 
+function filterArray<T>(array: T[], condition: (item: T) => boolean) : T[] {
+    return array.filter((item) => condition(item));
+}
+
+const numberArray = [1, 2, 3, 4, 5];
+const evenNumbers = filterArray<number>(numberArray, (num) => num % 2 === 0);
+console.log(evenNumbers);
+
+const stringArray = ["apple", "banana", "mango", "pineapple"];
+const shortWords = filterArray<string>(stringArray, (word) => word.length < 6);
+console.log(shortWords);
+
+//with interface 
+interface fruits{
+    name: string,
+    color: string
+}
+
+const fruitsArray: fruits[] = [
+    {name: "apple", color: "Red"},
+    {name: "mango", color: "Yellow"},
+    {name: "Cherry", color: "Red"}
+]
+
+const redFruites = filterArray<fruits>(fruitsArray, (fruit) => fruit.color === "Red");
+console.log(redFruites);
+
+function reversePair<T, U>(value1: T, value2: U) : [U, T] {
+    return [value2, value1];
+}
+
+const reversePairAns = reversePair("hello", 12);
+console.log(reversePairAns);
+
+//Generic classes 
+class Box<T> {
+    private content : T;
+
+    constructor(initialValue : T) {
+        this.content = initialValue;
+    }
+
+    getContent() : T{
+        return this.content;
+    }
+
+    setContent(newContent: T) : void{
+        this.content = newContent;
+    }
+}
+const stringBox = new Box<string>("Hello, TypeScript");
+console.log(stringBox.getContent());
+
+stringBox.setContent("New Content Added to the Course");
+console.log(stringBox.getContent());
+
+//for number 
+const numberBox = new Box<number>(20);
+console.log(numberBox.getContent());
+numberBox.setContent(30);
+console.log(numberBox.getContent());
+
+
+//TypeGuard in typescript
+type MyType = string | number;
+
+function myExample(value : MyType) : void{
+
+    //type gurad with typeof operator 
+    if(typeof value === "string"){
+        console.log(value.toUpperCase());   
+    }
+    else{
+        console.log(value.toFixed(2)); //here ts knows value is a number
+        
+    }
+}
+
+// myExample("hello typescript");
+myExample(123)
+
+class Dog{
+    bark() : void{
+        console.log("Woaf");
+        
+    }
+}
+
+class Meow{
+    meow() : void{
+        console.log("meow");
+    }
+}
+
+function animalSound(animal: Dog | Meow) : void{
+    if(animal instanceof Dog){
+        animal.bark();
+    }
+    else{
+        animal.meow();
+    }
+}
+
+const dogo1 = new Dog();
+const meow1 = new Meow();
+animalSound(dogo1);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
